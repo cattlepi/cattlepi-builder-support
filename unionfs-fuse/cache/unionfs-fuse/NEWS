@@ -1,0 +1,73 @@
+2.0
+- fixed NEWS file ;-)
+- reverted meta directory name back to .unionfs (from .unionfs-fuse)
+  this was never meant to be changed and slipped in in 1.0 release
+- fixes and speed improvements
+
+1.0
+- add unionfsctl utility to control unionfs-fuse over ioctl
+- better apple support
+- dropped stats
+- better test suite
+- probably lots of other things, it's been a while since last release ;-)
+
+0.26
+- use BUILD_PATH instead of snprintf, which will
+  return -ENAMETOOLONG if the path is too long instead of simply
+  using a wrong path
+- new options "-o relaxed_permissions" and "-o hide_meta_dir"
+- included the debian directory
+- Properly check on rmdir() if sub-branches are also empty
+- Always compile with debug code, but only enable debugging on request
+- New option -o debug_file
+- Lots of bugs fixed in BUILD_PATH()
+- Improved search of white-out files
+- Properly fix Debian Bug#509516.
+- More debug output.
+- Add syslog support without the risk of possible dead locks
+- Use fuse big-writes (and reads) if available
+
+0.25
+- Alternate way to specify branches
+- Minor fixes
+
+0.24
+- Support for liveCDs / live USB sticks (-o chroot)
+- Build-in support to change the maximum number of open files
+- Added recursive directory COW.
+- relative paths: Critical bug fix, had been completely broken in 0.23
+
+0.23
+- remove to_user() and to_root() calls for autorization and use fuse build-in
+  default_permissions checks
+- bugfix: rename created wrong whiteout type
+
+0.22
+- Fix a bug reported by Jens Hoelldampf <jens@hoelldampf.net>, in 0.21 cow
+  didn't work for pathes.
+
+0.21
+- Fix a segmentation fault when COW was enabled, but no rw-branch was specified.
+- Proper handling when ro-branches are on top of rw-branches.
+- Disabled syslog entries for now, since it might cause deadlocks.
+- Fixed a license issue with the elfhash, since the CPL is not compatible
+  with the BSD license.
+- Fix a bug when stat() was called instead of lstat().
+- Many internal code changes (renaming of "root" to "branch").
+- Better directory structure.
+- Add this NEWS file.
+- Add a man page.
+
+0.20
+- Fix a critical bug introduced in 0.19 when we disabled threadding.
+
+0.19
+- Several copy-on-write fixes (readdir, unlink, rmdir, rename).
+- Whiteout files are now located in branch/.unionfs/ subdirectories.
+- Disable threadding, since our current permissions-model is not compatible
+  with the NPTL implementation and the Posix-Thread model in general.
+- Add supplementary group support.
+
+0.18
+- First release with copy-on-write (COW) support.
+- Many many internal code changes.
